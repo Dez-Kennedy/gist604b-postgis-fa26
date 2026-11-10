@@ -22,8 +22,6 @@ FROM nyc_census_blocks;
 -- Hint: Use the nyc_census_blocks table
 -- Hint: Filter rows where boroname = 'Manhattan'
 
--- TODO: Write your query below
-
 SELECT SUM(popn_total) AS manhattan_pop
 FROM nyc_census_blocks
 WHERE boroname = 'Manhattan';
@@ -44,14 +42,11 @@ WHERE boroname = 'Manhattan';
 -- Hint: GROUP BY boroname
 -- Hint: Use ORDER BY boroname for readability
 
--- TODO: Write your query below
-
 SELECT boroname,
 100.0 * SUM(popn_black)/SUM(popn_total) AS percentage_black
 FROM nyc_census_blocks
 GROUP BY boroname
 ORDER BY boroname;
-
 
 -- Exercise 4: What is the average population per census block in each borough?
 -- Expected output: one row per borough with borough name and average population
@@ -68,4 +63,7 @@ ORDER BY boroname;
 -- Hint: GROUP BY boroname
 -- Hint: Use ORDER BY avg_population DESC for readability
 
--- TODO: Write your query below
+SELECT boroname, AVG(popn_total) AS avg_population
+FROM nyc_census_blocks
+GROUP BY boroname
+ORDER BY avg_population DESC;
