@@ -41,9 +41,10 @@ WHERE boroname = 'The Bronx';
 -- Hint: Filter where ST_NumInteriorRings(geom) = 0
 -- Hint: ST_NumInteriorRings(geom) = 0 means no holes (interior rings)
 
--- TODO: Write your query below
-
-
+SELECT 
+  COUNT(*) AS no_hole_polygons
+FROM nyc_census_blocks
+WHERE ST_NumInteriorRings(geom) = 0;
 
 
 -- Exercise 4: What is the total length of streets (in miles) in New York City?
