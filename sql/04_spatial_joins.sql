@@ -40,9 +40,11 @@ WHERE n.name = 'East Village';
 -- Hint: Use ST_Intersects(ss.geom, n.geom) in the JOIN clause
 -- Hint: Filter rows where ss.routes LIKE '%7%'
 
--- TODO: Write your query below
-
-
+SELECT DISTINCT n.name AS neighborhood_name
+FROM nyc_neighborhoods n
+JOIN nyc_subway_stations ss
+  ON ST_Intersects(ss.geom, n.geom)
+WHERE ss.routes LIKE '%7%';
 
 
 -- Exercise 3: How many people live in the Financial District?
