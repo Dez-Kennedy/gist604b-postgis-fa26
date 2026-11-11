@@ -11,10 +11,9 @@
 -- Hint: Filter rows where name = 'New Brighton'
 -- Note: Units will be in square meters (CRS is UTM Zone 18N, EPSG:26918)
 
--- TODO: Write your query below
-
-
-
+SELECT ST_Area(geom) AS new_brighton_area_sq_m
+FROM nyc_neighborhoods
+WHERE name = 'New Brighton';
 
 -- Exercise 2: What is the area of the Bronx in acres?
 -- Expected output: one row with the total area of the Bronx in acres
@@ -27,10 +26,9 @@
 -- Hint: Use the nyc_neighborhoods table
 -- Hint: Filter rows where boroname = 'The Bronx'
 
--- TODO: Write your query below
-
-
-
+SELECT ST_Area(ST_Union(geom)) / 4046.86 AS bronx_area_acres
+FROM nyc_neighborhoods
+WHERE boroname = 'The Bronx';
 
 -- Exercise 3: How many census blocks in New York City DO NOT have a hole in them?
 -- Expected output: one row with the count of census blocks without holes
