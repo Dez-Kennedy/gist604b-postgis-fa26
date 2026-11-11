@@ -32,7 +32,7 @@ WHERE s.name = 'Queensboro Brg';
 
 -- Exercise 3: What streets does Queensboro Brg intersect with?
 -- Expected output: multiple rows with intersecting street names
---    name
+--      name
 -- 1	21st St
 -- 2	23rd St
 -- 3	Queensborough Plaza
@@ -43,9 +43,11 @@ WHERE s.name = 'Queensboro Brg';
 -- Hint: Exclude the same street using name != 'Queensboro Brg' in the WHERE clause
 -- Hint: Exclude NULL street names using name IS NOT NULL in the WHERE clause
 
--- TODO: Write your query below
-
-
+SELECT name
+FROM nyc_streets
+WHERE ST_Intersects(geom, (SELECT geom FROM nyc_streets WHERE name = 'Queensboro Brg'))
+AND name != 'Queensboro Brg'
+AND name IS NOT NULL;
 
 
 -- Exercise 4: Approximately how many people live within 50 meters of Queensboro Brg?
@@ -58,7 +60,6 @@ WHERE s.name = 'Queensboro Brg';
 -- Hint: Use ST_DWithin(geom, ..., 50) in the WHERE clause
 -- Hint: Use the SQL query from Exercise 1 to get the geometry of Queensboro Brg in the WHERE clause
 
--- TODO: Write your query below
 
 
 
