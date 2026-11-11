@@ -15,9 +15,11 @@
 -- Hint: Use ST_Intersects(ss.geom, n.geom) in the JOIN clause
 -- Hint: Filter rows where n.name = 'East Village'
 
--- TODO: Write your query below
-
-
+SELECT s.name, s.routes
+FROM nyc_subway_stations AS s
+JOIN nyc_neighborhoods AS n
+ON ST_Intersects(n.geom, s.geom)
+WHERE n.name = 'East Village';
 
 
 -- Exercise 2: What are all the neighborhoods served by the 7-train?
