@@ -15,6 +15,7 @@ SELECT ST_Area(geom) AS new_brighton_area_sq_m
 FROM nyc_neighborhoods
 WHERE name = 'New Brighton';
 
+
 -- Exercise 2: What is the area of the Bronx in acres?
 -- Expected output: one row with the total area of the Bronx in acres
 -- bronx_area_acres
@@ -29,6 +30,7 @@ WHERE name = 'New Brighton';
 SELECT ST_Area(ST_Union(geom)) / 4046.86 AS bronx_area_acres
 FROM nyc_neighborhoods
 WHERE boroname = 'The Bronx';
+
 
 -- Exercise 3: How many census blocks in New York City DO NOT have a hole in them?
 -- Expected output: one row with the count of census blocks without holes
@@ -45,6 +47,7 @@ SELECT
   COUNT(*) AS no_hole_polygons
 FROM nyc_census_blocks
 WHERE ST_NumInteriorRings(geom) = 0;
+
 
 -- Exercise 4: What is the total length of streets (in miles) in New York City?
 -- Expected output: one row with total street length in miles
@@ -107,15 +110,15 @@ SELECT ST_NumGeometries(geom) AS num_coney_island_polygons
 FROM nyc_neighborhoods
 WHERE name = 'Coney Island';
 
+
 -- Exercise 8: What are the 5 longest roads in NYC?
 -- Expected output: five rows with road names and lengths in meters
---    name               length_meters
--- 1	Leif Ericson Dr	   14918.122617388475
--- 2	Hylan Blvd	       14010.05123693547
+--      name                 length_meters
+-- 1	Leif Ericson Dr	     14918.122617388475
+-- 2	Hylan Blvd	         14010.05123693547
 -- 3	Grand Central Pky	 14004.747129767076
 -- 4	Nostrand Ave	     12916.485763265595
 -- 5	Ocean Ave	         12342.720041053057
-
 
 -- Hint: Use ST_Length() on the geom column
 -- Hint: Use length_meters as the output alias
@@ -123,5 +126,8 @@ WHERE name = 'Coney Island';
 -- Hint: ORDER BY ST_Length(geom) DESC OR use the alias length_meters
 -- Hint: Use LIMIT 5
 
-
+SELECT name, ST_Length(geom) AS length_meters
+FROM nyc_streets
+ORDER BY length_meters DESC
+LIMIT 5;
 
