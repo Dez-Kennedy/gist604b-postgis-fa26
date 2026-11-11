@@ -67,7 +67,7 @@ WHERE n.name = 'Financial District';
 
 -- Exercise 4: What are the population densities (people / km^2) of the 'East Village' and 'West Village'?
 -- Expected output: two rows with neighborhood name and population density per square kilometer
---    name          population_density_per_sqkm
+--      name            population_density_per_sqkm
 -- 1	East Village	50404.48341332535
 -- 2	West Village	25576.898694859083
 
@@ -79,7 +79,12 @@ WHERE n.name = 'Financial District';
 -- Hint: Filter rows where n.name IN ('East Village', 'West Village')
 -- Hint: GROUP BY n.name, n.geom
 
--- TODO: Write your query below
+SELECT n.name, SUM(cb.popn_total) / (ST_Area(n.geom) / 1000000.0) AS population_density_per_sqkm
+FROM nyc_neighborhoods n
+JOIN nyc_census_blocks cb
+  ON ST_Intersects(cb.geom, n.geom)
+WHERE n.name IN ('East Village', 'West Village')
+GROUP BY n.name, n.geom;
 
 
 
