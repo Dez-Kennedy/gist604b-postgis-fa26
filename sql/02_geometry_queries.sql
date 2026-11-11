@@ -87,9 +87,9 @@ WHERE name = '5th Ave'
 -- Hint: Use the nyc_neighborhoods table
 -- Hint: Filter rows where name = 'Soho'
 
--- TODO: Write your query below
-
-
+SELECT ST_AsGeoJSON(geom) AS soho_geojson
+FROM nyc_neighborhoods
+WHERE name = 'Soho'
 
 
 -- Exercise 7: How many polygons are in the 'Coney Island' multipolygon?
