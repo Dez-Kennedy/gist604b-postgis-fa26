@@ -46,7 +46,6 @@ SELECT
 FROM nyc_census_blocks
 WHERE ST_NumInteriorRings(geom) = 0;
 
-
 -- Exercise 4: What is the total length of streets (in miles) in New York City?
 -- Expected output: one row with total street length in miles
 -- total_length_miles
@@ -58,7 +57,8 @@ WHERE ST_NumInteriorRings(geom) = 0;
 -- Hint: Use total_length_miles as the output alias
 -- Hint: Use the nyc_streets table
 
--- TODO: Write your query below
+SELECT Sum(ST_Length(geom)) / 1609.34 AS total_length_miles
+FROM nyc_streets;
 
 
 
