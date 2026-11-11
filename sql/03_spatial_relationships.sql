@@ -60,6 +60,13 @@ AND name IS NOT NULL;
 -- Hint: Use ST_DWithin(geom, ..., 50) in the WHERE clause
 -- Hint: Use the SQL query from Exercise 1 to get the geometry of Queensboro Brg in the WHERE clause
 
-
+SELECT 
+  SUM(popn_total) AS total_population
+FROM nyc_census_blocks
+WHERE ST_DWithin(
+  geom,
+  (SELECT geom FROM nyc_streets WHERE name = 'Queensboro Brg'),
+  50
+);
 
 
