@@ -10,7 +10,7 @@
 
 SELECT ST_AsText(geom) AS queensboro
 FROM nyc_streets
-WHERE name = 'Queensboro Brg'
+WHERE name = 'Queensboro Brg';
 
 
 -- Exercise 2: What neighborhood and borough is Queensboro Brg in?
@@ -23,9 +23,11 @@ WHERE name = 'Queensboro Brg'
 -- Hint: Use ST_Intersects(geom, ...) in the WHERE clause
 -- Hint: Use the SQL query from Exercise 1 to get the geometry of Queensboro Brg in the WHERE clause
 
--- TODO: Write your query below
-
-
+SELECT n.name as neighborhood, n.boroname as borough
+FROM nyc_neighborhoods n
+JOIN nyc_streets s
+ON ST_Intersects(n.geom, s.geom)
+WHERE s.name = 'Queensboro Brg';
 
 
 -- Exercise 3: What streets does Queensboro Brg intersect with?
