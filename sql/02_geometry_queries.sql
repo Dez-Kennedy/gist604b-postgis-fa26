@@ -61,8 +61,6 @@ SELECT Sum(ST_Length(geom)) / 1609.34 AS total_length_miles
 FROM nyc_streets;
 
 
-
-
 -- Exercise 5: How long is '5th Ave' in meters?
 -- Expected output: one row with the length of 5th Ave
 -- fifth_ave_length
@@ -74,9 +72,9 @@ FROM nyc_streets;
 -- Hint: Use the nyc_streets table
 -- Hint: Filter rows where name = '5th Ave'
 
--- TODO: Write your query below
-
-
+SELECT Sum(ST_Length(geom)) AS fifth_ave_length
+FROM nyc_streets
+WHERE name = '5th Ave'
 
 
 -- Exercise 6: What is the JSON representation of the boundary of 'Soho'?
